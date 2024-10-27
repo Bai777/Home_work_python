@@ -27,8 +27,8 @@ def set_reminder():
             print(time_convert)
             reminder_text = sd.askstring("Текст напоминания",
                                          "Введите текст напоминания:")
-            labelRemin.config(text=f"Напоминание установлено на: "
-                                   f"{hour_remi: 02}: {minute_remi: 02}")
+            labelRemin.config(text=f"Напоминание установлено на "
+                                   f"{hour_remi:02}: {minute_remi:02}")
         except Exception as e:
             mb.showerror('Ошибка!', f'Произошла ошибка {e}')
 
