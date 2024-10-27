@@ -36,6 +36,13 @@ def check_reminder():
             time_convert = 0
     window.after(10000, check_reminder)
 
+
+def play_snd():
+    pygame.mixer.init()
+    pygame.mixer_music.load('reminder.mp3')
+    pygame.mixer.music.play()
+
+
 window = Tk()
 window.title('Напоминание')
 
