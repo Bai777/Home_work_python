@@ -59,7 +59,7 @@ def stop_music():
     labelRemin.config(text='Установить новое напоминание')
 
 
-def exit_programm():
+def exit_program():
     window.destroy()
 
 
@@ -76,7 +76,7 @@ setButton.pack(pady=10)
 stopButton = Button(text='Остановить музыку', command=stop_music)
 stopButton.pack(pady=10)
 
-exitButton = Button(text='Выход', command=exit_programm)
+exitButton = Button(text='Выход', command=exit_program)
 exitButton.pack(pady=10)
 
 check_reminder()
