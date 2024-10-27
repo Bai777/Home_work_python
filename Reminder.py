@@ -28,7 +28,8 @@ def set_reminder():
             reminder_text = sd.askstring("Текст напоминания",
                                          "Введите текст напоминания:")
             labelRemin.config(text=f"Напоминание установлено на "
-                                   f"{hour_remi:02}: {minute_remi:02}")
+                                   f"{hour_remi:02}: {minute_remi:02}\n "
+                                   f"напомнить о {reminder_text}")
         except Exception as e:
             mb.showerror('Ошибка!', f'Произошла ошибка {e}')
 
@@ -57,9 +58,14 @@ def stop_music():
         stop_flag = False
     labelRemin.config(text='Установить новое напоминание')
 
+
+def exit_programm():
+    window.destroy()
+
+
 window = Tk()
 window.title('Напоминание')
-window.geometry('400x400')
+window.geometry('400x300')
 
 labelRemin = Label(text='Установите напоминание', font=('Arial', 14))
 labelRemin.pack(pady=10)
@@ -69,6 +75,9 @@ setButton.pack(pady=10)
 
 stopButton = Button(text='Остановить музыку', command=stop_music)
 stopButton.pack(pady=10)
+
+exitButton = Button(text='Выход', command=exit_programm)
+exitButton.pack(pady=10)
 
 check_reminder()
 
