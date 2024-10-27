@@ -6,7 +6,7 @@ import time
 import pygame
 
 time_convert = None
-
+stop_flag = False
 
 def set_reminder():
     global time_convert, reminder_text
@@ -44,10 +44,18 @@ def check_reminder():
 
 
 def play_snd():
+    global stop_flag
+    stop_flag = True
     pygame.mixer.init()
     pygame.mixer.music.load('reminder.mp3')
     pygame.mixer.music.play()
 
+def stop_music():
+    global stop_flag
+    if stop_flag:
+        pygame.mixer.music.stop()
+        stop_flag = False
+    labelRemin.config(text='Установить новое напоминание')
 
 window = Tk()
 window.title('Напоминание')
@@ -57,7 +65,10 @@ labelRemin = Label(text='Установите напоминание', font=('Ar
 labelRemin.pack(pady=10)
 
 setButton = Button(text='Установить напоминание', command=set_reminder)
-setButton.pack()
+setButton.pack(pady=10)
+
+stopButton = Button(text='Остановить музыку', command=stop_music)
+stopButton.pack(pady=10)
 
 check_reminder()
 
