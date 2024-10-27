@@ -5,11 +5,11 @@ import datetime
 import time
 import pygame
 
-time_convert = None
+time_convert = 0
 stop_flag = False
 
 def set_reminder():
-    global time_convert, reminder_text
+    global time_convert
     reminder = sd.askstring('Введите время напоминания',
                             'Введите время напоминания '
                             'в формате ЧЧ:ММ в 24 часовом формате')
@@ -40,7 +40,7 @@ def check_reminder():
         now_time = time.time()
         if now_time >= time_convert:
             play_snd()
-            time_convert = None
+            time_convert = 0
     window.after(10000, check_reminder)
 
 
