@@ -5,11 +5,11 @@ import datetime
 import time
 import pygame
 
-time_convert = 0
+time_convert = None
 
 
 def set_reminder():
-    global time_convert
+    global time_convert, reminder_text
     reminder = sd.askstring('Введите время напоминания',
                             'Введите время напоминания '
                             'в формате ЧЧ:ММ в 24 часовом формате')
@@ -19,10 +19,15 @@ def set_reminder():
             minute_remi = int(reminder.split(':')[1])
             now_time = datetime.datetime.now()
             print(now_time)
-            date_time = now_time.replace(hour=hour_remi, minute=minute_remi)
+            date_time = now_time.replace(hour=hour_remi,
+                                         minute=minute_remi)
             print(date_time)
             time_convert = date_time.timestamp()
             print(time_convert)
+            reminder_text = sd.askstring("Текст напоминания",
+                                         "Введите текст напоминания:")
+            labelRemin.config(text=f"Напоминание установлено на: "
+                                   f"{hour_remi: 02}: {minute_remi: 02}")
         except Exception as e:
             mb.showerror('Ошибка!', f'Произошла ошибка {e}')
 
@@ -33,25 +38,25 @@ def check_reminder():
         now_time = time.time()
         if now_time >= time_convert:
             play_snd()
-            time_convert = 0
+            time_convert = None
     window.after(10000, check_reminder)
 
 
 def play_snd():
     pygame.mixer.init()
-    pygame.mixer_music.load('reminder.mp3')
+    pygame.mixer.music.load('reminder.mp3')
     pygame.mixer.music.play()
 
 
 window = Tk()
 window.title('Напоминание')
 
-labelRemin = Label(text='Установите напоминание')
+labelRemin = Label(text='Установите напоминание', font=('Arial', 14))
 labelRemin.pack(pady=10)
 
 setButton = Button(text='Установить напоминание', command=set_reminder)
 setButton.pack()
 
-
+check_reminder()
 
 window.mainloop()
