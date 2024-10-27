@@ -20,7 +20,8 @@ def set_reminder():
             now_time = datetime.datetime.now()
             print(now_time)
             date_time = now_time.replace(hour=hour_remi,
-                                         minute=minute_remi)
+                                         minute=minute_remi,
+                                         second=0)
             print(date_time)
             time_convert = date_time.timestamp()
             print(time_convert)
@@ -50,6 +51,7 @@ def play_snd():
 
 window = Tk()
 window.title('Напоминание')
+window.geometry('400x400')
 
 labelRemin = Label(text='Установите напоминание', font=('Arial', 14))
 labelRemin.pack(pady=10)
